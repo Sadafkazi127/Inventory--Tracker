@@ -38,6 +38,7 @@ function CustomerModal({
 }) {
   const colors = useColors();
   const [form, setForm] = useState<FormData>(EMPTY);
+  const insets = useSafeAreaInsets();
 
   React.useEffect(() => {
     if (visible) {
@@ -68,7 +69,7 @@ function CustomerModal({
           </Pressable>
         </View>
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ flex: 1 }}>
-          <ScrollView contentContainerStyle={{ padding: 16, gap: 14, paddingBottom: 60 }}>
+          <ScrollView showsVerticalScrollIndicator={true} contentContainerStyle={{ paddingTop: 16, paddingLeft: 16, paddingRight: 16, gap: 14, paddingBottom: insets.bottom + 180 }}>
             {(['name', 'phone', 'email'] as (keyof FormData)[]).map((key) => (
               <View key={key} style={{ gap: 6 }}>
                 <Text style={[styles.label, { color: colors.text }]}>
@@ -154,11 +155,11 @@ export default function CustomersScreen() {
         <SearchBar value={search} onChangeText={setSearch} placeholder="Search customers…" />
       </View>
 
-      <FlatList
-        data={filtered}
-        keyExtractor={(c) => c.id}
-        contentContainerStyle={{ padding: 16, paddingBottom: insets.bottom + 120, gap: 10 }}
-        showsVerticalScrollIndicator={false}
+          <FlatList
+          data={filtered}
+          keyExtractor={(c) => c.id}
+            contentContainerStyle={{ paddingLeft: 16, paddingRight: 16, paddingBottom: insets.bottom + 180, gap: 10 }}
+            showsVerticalScrollIndicator={true}
         ListEmptyComponent={
           <EmptyState icon="users" title="No customers" description="Tap + to add your first customer" />
         }

@@ -147,11 +147,12 @@ export default function BillingScreen() {
   return (
     <View style={[styles.root, { backgroundColor: colors.background }]}>
       <ScrollView
-        showsVerticalScrollIndicator={false}
+        showsVerticalScrollIndicator={true}
         contentContainerStyle={{
           paddingTop: webPad + 12,
-          paddingBottom: insets.bottom + 100,
-          padding: 16,
+          paddingBottom: insets.bottom + 180,
+          paddingLeft: 16,
+          paddingRight: 16,
           gap: 14,
         }}
         keyboardShouldPersistTaps="handled"
@@ -392,7 +393,8 @@ export default function BillingScreen() {
           <FlatList
             data={filteredCustomers}
             keyExtractor={(c) => c.id}
-            contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 40 }}
+            contentContainerStyle={{ paddingLeft: 16, paddingRight: 16, paddingBottom: insets.bottom + 180 }}
+            showsVerticalScrollIndicator={true}
             ListEmptyComponent={
               <Text style={[styles.emptyCart, { color: colors.mutedForeground, textAlign: 'center', marginTop: 32 }]}>
                 No customers found

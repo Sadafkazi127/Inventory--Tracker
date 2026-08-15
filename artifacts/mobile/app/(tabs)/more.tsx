@@ -82,11 +82,12 @@ export default function MoreScreen() {
       style={[styles.root, { backgroundColor: colors.background }]}
       contentContainerStyle={{
         paddingTop: webPad + 8,
-        paddingBottom: insets.bottom + 100,
-        padding: 16,
+        paddingBottom: insets.bottom + 180,
+        paddingLeft: 16,
+        paddingRight: 16,
         gap: 12,
       }}
-      showsVerticalScrollIndicator={false}
+      showsVerticalScrollIndicator={true}
     >
       {/* User card */}
       <View style={[styles.userCard, { backgroundColor: colors.primary }]}>

@@ -17,6 +17,7 @@ import type { Sale } from '@/constants/types';
 import { api } from '@/lib/apiClient';
 import { Feather } from '@expo/vector-icons';
 import { Stack, useLocalSearchParams } from 'expo-router';
+import BackButton from '@/components/BackButton';
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
 import * as Haptics from 'expo-haptics';
@@ -193,7 +194,7 @@ export default function InvoiceScreen() {
   if (!sale) {
     return (
       <>
-        <Stack.Screen options={{ title: 'Invoice' }} />
+        <Stack.Screen options={{ title: 'Invoice', headerLeft: () => <BackButton /> }} />
         <View style={[styles.center, { backgroundColor: colors.background }]}>
           <Text style={[styles.notFound, { color: colors.mutedForeground }]}>Invoice not found</Text>
         </View>
@@ -203,16 +204,16 @@ export default function InvoiceScreen() {
 
   return (
     <>
-      <Stack.Screen options={{ title: sale.invoiceNumber }} />
+      <Stack.Screen options={{ title: sale.invoiceNumber, headerLeft: () => <BackButton /> }} />
       <View style={[styles.root, { backgroundColor: colors.background }]}>
         <ScrollView
           contentContainerStyle={{
             paddingTop: webPad + 16,
-            paddingBottom: insets.bottom + 120,
+            paddingBottom: insets.bottom + 180,
             padding: 16,
             gap: 14,
           }}
-          showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={true}
         >
           {/* Invoice header card */}
           <View style={[styles.invoiceHeader, { backgroundColor: colors.primary }]}>

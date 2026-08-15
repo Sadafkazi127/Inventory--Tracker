@@ -14,6 +14,7 @@ import { useApp } from '@/context/AppContext';
 import { BarChart } from '@/components/BarChart';
 import { formatCurrency, isThisMonth, isThisWeek, isThisYear, isToday } from '@/constants/storage';
 import { Feather } from '@expo/vector-icons';
+import BackButton from '@/components/BackButton';
 import { Stack } from 'expo-router';
 import * as Sharing from 'expo-sharing';
 import * as FileSystem from 'expo-file-system/legacy';
@@ -158,16 +159,16 @@ export default function ReportsScreen() {
 
   return (
     <>
-      <Stack.Screen options={{ title: 'Reports', headerBackTitle: 'More' }} />
+      <Stack.Screen options={{ title: 'Reports', headerBackTitle: 'More', headerLeft: () => <BackButton /> }} />
       <ScrollView
         style={[styles.root, { backgroundColor: colors.background }]}
         contentContainerStyle={{
           paddingTop: webPad + 12,
-          paddingBottom: insets.bottom + 100,
+          paddingBottom: insets.bottom + 180,
           padding: 16,
           gap: 16,
         }}
-        showsVerticalScrollIndicator={false}
+        showsVerticalScrollIndicator={true}
       >
         {/* Period selector */}
         <View style={styles.periodRow}>

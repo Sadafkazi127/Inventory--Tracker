@@ -42,8 +42,9 @@ export default function DashboardScreen() {
       style={[styles.root, { backgroundColor: colors.background }]}
       contentContainerStyle={{
         paddingTop: webPad + 12,
-        paddingBottom: insets.bottom + 100,
-        padding: 16,
+        paddingBottom: insets.bottom + 180,
+        paddingLeft: 16,
+        paddingRight: 16,
         gap: 20,
       }}
       showsVerticalScrollIndicator={true}

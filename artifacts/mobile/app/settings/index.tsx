@@ -17,6 +17,7 @@ import { useAuth } from '@/context/AuthContext';
 import { Feather } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { Stack } from 'expo-router';
+import BackButton from '@/components/BackButton';
 
 function Field({
   label,
@@ -100,7 +101,7 @@ export default function SettingsScreen() {
 
   return (
     <>
-      <Stack.Screen options={{ title: 'Settings', headerBackTitle: 'More' }} />
+      <Stack.Screen options={{ title: 'Settings', headerBackTitle: 'More', headerLeft: () => <BackButton /> }} />
       <KeyboardAvoidingView
         style={[styles.root, { backgroundColor: colors.background }]}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -108,11 +109,11 @@ export default function SettingsScreen() {
         <ScrollView
           contentContainerStyle={{
             paddingTop: webPad + 16,
-            paddingBottom: insets.bottom + 100,
+            paddingBottom: insets.bottom + 180,
             padding: 16,
             gap: 20,
           }}
-          showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={true}
         >
           {/* Shop Info */}
           <View style={[styles.section, { backgroundColor: colors.card, borderColor: colors.border }]}>

@@ -60,6 +60,7 @@ function ProductModal({
 }) {
   const colors = useColors();
   const [form, setForm] = useState<FormData>(EMPTY_FORM);
+  const insets = useSafeAreaInsets();
   const [newCat, setNewCat] = useState('');
 
   React.useEffect(() => {
@@ -132,7 +133,7 @@ function ProductModal({
           behavior={Platform.OS === 'ios' ? 'padding' : undefined}
           style={{ flex: 1 }}
         >
-          <ScrollView contentContainerStyle={styles.modalBody} showsVerticalScrollIndicator={false}>
+          <ScrollView showsVerticalScrollIndicator={true} contentContainerStyle={{ paddingTop: 16, paddingLeft: 16, paddingRight: 16, gap: 14, paddingBottom: insets.bottom + 180 }}>
             {field('Product Name *', 'name')}
             {field('Barcode', 'barcode')}
 
@@ -317,8 +318,8 @@ export default function ProductsScreen() {
       <FlatList
         data={filtered}
         keyExtractor={(p) => p.id}
-        contentContainerStyle={{ padding: 16, paddingBottom: insets.bottom + 120, gap: 10 }}
-        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingLeft: 16, paddingRight: 16, paddingBottom: insets.bottom + 180, gap: 10 }}
+        showsVerticalScrollIndicator={true}
         ListEmptyComponent={
           <EmptyState
             icon="package"

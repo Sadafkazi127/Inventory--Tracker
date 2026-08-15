@@ -21,6 +21,7 @@ import { formatDateTime } from '@/constants/storage';
 import type { Product } from '@/constants/types';
 import { Feather } from '@expo/vector-icons';
 import { Stack } from 'expo-router';
+import BackButton from '@/components/BackButton';
 import * as Haptics from 'expo-haptics';
 
 type Tab = 'stock' | 'logs';
@@ -63,7 +64,7 @@ function StockModal({
             <Text style={[styles.saveBtn, { color: colors.primary }]}>Save</Text>
           </Pressable>
         </View>
-        <ScrollView contentContainerStyle={{ padding: 16, gap: 16, paddingBottom: 60 }}>
+        <ScrollView showsVerticalScrollIndicator={true} contentContainerStyle={{ padding: 16, gap: 16, paddingBottom: 60 }}>
           {product && (
             <View style={[styles.productInfo, { backgroundColor: colors.muted, borderColor: colors.border }]}>
               <Text style={[styles.productName, { color: colors.text }]}>{product.name}</Text>
@@ -149,7 +150,7 @@ export default function InventoryScreen() {
 
   return (
     <>
-      <Stack.Screen options={{ title: 'Inventory', headerBackTitle: 'More' }} />
+      <Stack.Screen options={{ title: 'Inventory', headerBackTitle: 'More', headerLeft: () => <BackButton /> }} />
       <View style={[styles.root, { backgroundColor: colors.background }]}>
         {/* Summary bar */}
         <View style={[styles.summaryBar, { backgroundColor: colors.card, borderBottomColor: colors.border }]}>
@@ -193,7 +194,7 @@ export default function InventoryScreen() {
               data={filteredProducts}
               keyExtractor={(p) => p.id}
               contentContainerStyle={{ padding: 16, paddingTop: 4, paddingBottom: insets.bottom + 120, gap: 8 }}
-              showsVerticalScrollIndicator={false}
+              showsVerticalScrollIndicator={true}
               ListEmptyComponent={<EmptyState icon="layers" title="No products" description="Add products to track inventory" />}
               renderItem={({ item: p }) => {
                 const isLow = p.stock <= settings.lowStockThreshold;
@@ -238,7 +239,7 @@ export default function InventoryScreen() {
             data={inventoryLogs}
             keyExtractor={(l) => l.id}
             contentContainerStyle={{ padding: 16, paddingBottom: insets.bottom + 100, gap: 8 }}
-            showsVerticalScrollIndicator={false}
+            showsVerticalScrollIndicator={true}
             ListEmptyComponent={<EmptyState icon="list" title="No logs yet" description="Stock changes appear here" />}
             renderItem={({ item: log }) => (
               <View style={[styles.logCard, { backgroundColor: colors.card, borderColor: colors.border }]}>

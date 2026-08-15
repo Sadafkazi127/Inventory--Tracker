@@ -76,11 +76,12 @@ export default function SalesScreen() {
       <Stack.Screen options={{ title: 'Sales History', headerBackTitle: 'More' }} />
       <View style={[styles.root, { backgroundColor: colors.background }]}>
         <View style={{ paddingTop: webPad + 12, paddingHorizontal: 16, gap: 10, paddingBottom: 8 }}>
-          <SearchBar value={search} onChangeText={setSearch} placeholder="Search invoice, customer…" />
+  import { router, Stack } from 'expo-router';
+  import BackButton from '@/components/BackButton';
 
           {/* Date filter chips */}
           <View style={styles.filterRow}>
-            {DATE_FILTERS.map((f) => (
+        <Stack.Screen options={{ title: 'Sales History', headerBackTitle: 'More', headerLeft: () => <BackButton /> }} />
               <Pressable
                 key={f.value}
                 style={[
@@ -110,8 +111,8 @@ export default function SalesScreen() {
         <FlatList
           data={filtered}
           keyExtractor={(s) => s.id}
-          contentContainerStyle={{ padding: 16, paddingTop: 4, paddingBottom: insets.bottom + 100, gap: 8 }}
-          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ padding: 16, paddingTop: 4, paddingBottom: insets.bottom + 180, gap: 8 }}
+          showsVerticalScrollIndicator={true}
           ListEmptyComponent={
             <EmptyState
               icon="file-text"
