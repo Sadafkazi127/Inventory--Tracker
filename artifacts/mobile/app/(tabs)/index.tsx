@@ -46,7 +46,7 @@ export default function DashboardScreen() {
         padding: 16,
         gap: 20,
       }}
-      showsVerticalScrollIndicator={false}
+      showsVerticalScrollIndicator={true}
     >
       {/* Welcome */}
       <View style={styles.welcomeRow}>

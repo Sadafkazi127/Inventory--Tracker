@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 
 const API_URL = process.env.EXPO_PUBLIC_API_URL ?? 'http://localhost:3000/api';
@@ -14,10 +15,23 @@ export class ApiError extends Error {
 }
 
 export async function getToken(): Promise<string | null> {
+  if (Platform.OS === 'web') {
+    return localStorage.getItem(TOKEN_KEY);
+  }
+
   return SecureStore.getItemAsync(TOKEN_KEY);
 }
 
 export async function setToken(token: string | null): Promise<void> {
+  if (Platform.OS === 'web') {
+    if (token) {
+      localStorage.setItem(TOKEN_KEY, token);
+    } else {
+      localStorage.removeItem(TOKEN_KEY);
+    }
+    return;
+  }
+
   if (token) {
     await SecureStore.setItemAsync(TOKEN_KEY, token);
   } else {
@@ -28,6 +42,7 @@ export async function setToken(token: string | null): Promise<void> {
 // Fired when the server rejects the stored token (expired/invalid), so
 // AuthContext can log the user out without every call site handling it.
 let onUnauthorized: (() => void) | null = null;
+
 export function setUnauthorizedHandler(handler: () => void) {
   onUnauthorized = handler;
 }
@@ -38,7 +53,10 @@ async function request<T>(
 ): Promise<T> {
   const { method = 'GET', body, skipAuth = false } = options;
 
-  const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+  };
+
   if (!skipAuth) {
     const token = await getToken();
     if (token) headers.Authorization = `Bearer ${token}`;
@@ -48,6 +66,7 @@ async function request<T>(
   const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
 
   let response: Response;
+
   try {
     response = await fetch(`${API_URL}${path}`, {
       method,
@@ -57,11 +76,20 @@ async function request<T>(
     });
   } catch (err) {
     clearTimeout(timeout);
+
     if (err instanceof Error && err.name === 'AbortError') {
-      throw new ApiError(0, 'Request timed out. Check your connection and try again.');
+      throw new ApiError(
+        0,
+        'Request timed out. Check your connection and try again.'
+      );
     }
-    throw new ApiError(0, 'Could not reach the server. Check your connection.');
+
+    throw new ApiError(
+      0,
+      'Could not reach the server. Check your connection.'
+    );
   }
+
   clearTimeout(timeout);
 
   if (response.status === 204) {
@@ -69,6 +97,7 @@ async function request<T>(
   }
 
   let data: unknown;
+
   try {
     data = await response.json();
   } catch {
@@ -77,10 +106,13 @@ async function request<T>(
 
   if (!response.ok) {
     const message =
-      (data as { error?: string } | null)?.error ?? `Request failed (${response.status})`;
+      (data as { error?: string } | null)?.error ??
+      `Request failed (${response.status})`;
+
     if (response.status === 401 && !skipAuth) {
       onUnauthorized?.();
     }
+
     throw new ApiError(response.status, message);
   }
 
@@ -89,8 +121,16 @@ async function request<T>(
 
 export const api = {
   get: <T>(path: string) => request<T>(path),
-  post: <T>(path: string, body?: unknown, opts?: { skipAuth?: boolean }) =>
-    request<T>(path, { method: 'POST', body, ...opts }),
-  put: <T>(path: string, body?: unknown) => request<T>(path, { method: 'PUT', body }),
-  delete: <T>(path: string) => request<T>(path, { method: 'DELETE' }),
+
+  post: <T>(
+    path: string,
+    body?: unknown,
+    opts?: { skipAuth?: boolean }
+  ) => request<T>(path, { method: 'POST', body, ...opts }),
+
+  put: <T>(path: string, body?: unknown) =>
+    request<T>(path, { method: 'PUT', body }),
+
+  delete: <T>(path: string) =>
+    request<T>(path, { method: 'DELETE' }),
 };

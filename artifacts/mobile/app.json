@@ -15,7 +15,10 @@
     },
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.shopmaster.inventorybilling"
+      "bundleIdentifier": "com.shopmaster.inventorybilling",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "package": "com.shopmaster.inventorybilling"
@@ -37,6 +40,11 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "72125b71-528a-413e-b901-c877de9a2fc0"
+      }
     }
   }
 }
