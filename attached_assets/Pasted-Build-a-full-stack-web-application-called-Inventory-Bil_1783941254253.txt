@@ -1,0 +1,280 @@
+Build a full-stack web application called Inventory & Billing Software for Local Shops using the following technology stack:
+
+Tech Stack
+	•	Frontend: React + TypeScript
+	•	Styling: Tailwind CSS + shadcn/ui
+	•	Backend: Supabase
+	•	Database: Supabase PostgreSQL
+	•	Authentication: Supabase Auth (Email & Password)
+	•	Charts: Chart.js
+	•	PDF Generation: jsPDF + AutoTable
+
+The application should have a modern, clean, responsive dashboard similar to professional POS (Point of Sale) software. Use a blue and white color theme with rounded cards, professional tables, icons, and responsive layouts.
+
+⸻
+
+Authentication
+
+Create a secure login system using Supabase Auth.
+
+Features:
+	•	Login
+	•	Logout
+	•	Protected Dashboard
+	•	Remember Logged-in User
+
+⸻
+
+Dashboard
+
+Display summary cards:
+	•	Total Products
+	•	Total Categories
+	•	Total Inventory
+	•	Today’s Sales
+	•	Monthly Sales
+	•	Total Revenue
+	•	Low Stock Products
+
+Include:
+	•	Recent Sales Table
+	•	Sales Analytics Chart
+	•	Inventory Overview
+	•	Low Stock Alert Card
+
+⸻
+
+Product Management
+
+CRUD operations.
+
+Fields:
+	•	Product ID
+	•	Product Name
+	•	Category
+	•	Barcode
+	•	Purchase Price
+	•	Selling Price
+	•	Stock Quantity
+	•	Unit
+	•	Product Image (optional)
+
+Functions:
+	•	Add Product
+	•	Edit Product
+	•	Delete Product
+	•	Search Product
+	•	Filter by Category
+
+⸻
+
+Inventory Management
+
+Create a dedicated Inventory page.
+
+Features:
+	•	View Current Stock
+	•	Add New Stock
+	•	Update Existing Stock
+	•	Automatic Stock Reduction after Billing
+	•	Low Stock Alerts
+	•	Stock Movement History
+	•	Search Inventory
+
+Highlight products with stock below 10 in red.
+
+⸻
+
+Billing (POS Screen)
+
+Create a professional billing interface.
+
+Features:
+	•	Search Product
+	•	Barcode Search (optional)
+	•	Add Multiple Products
+	•	Increase or Decrease Quantity
+	•	Remove Product
+	•	Automatic Price Calculation
+	•	Discount
+	•	GST (optional)
+	•	Grand Total
+	•	Payment Method (Cash / UPI / Card)
+	•	Generate Invoice
+	•	Save Sale in Database
+
+When billing is completed:
+	•	Reduce Inventory Automatically
+	•	Store Sale
+	•	Store Sold Items
+	•	Update Dashboard Statistics
+
+⸻
+
+PDF Invoice
+
+Generate a downloadable and printable PDF invoice.
+
+Invoice should contain:
+	•	Shop Logo
+	•	Shop Name
+	•	Address
+	•	GST Number (Optional)
+	•	Invoice Number
+	•	Date & Time
+	•	Customer Name (Optional)
+
+Product Table:
+	•	Product
+	•	Quantity
+	•	Unit Price
+	•	Total
+
+Bottom:
+	•	Subtotal
+	•	Discount
+	•	GST
+	•	Grand Total
+
+Footer:
+
+“Thank You! Visit Again.”
+
+Buttons:
+	•	Download PDF
+	•	Print Invoice
+
+⸻
+
+Customers
+
+Customer Management Module.
+
+Fields:
+	•	Customer Name
+	•	Phone Number
+	•	Email (optional)
+
+Features:
+	•	Add Customer
+	•	Edit Customer
+	•	Delete Customer
+	•	Purchase History
+
+⸻
+
+Sales History
+
+Display all previous bills.
+
+Columns:
+	•	Invoice Number
+	•	Customer
+	•	Date
+	•	Total Amount
+	•	Payment Method
+
+Actions:
+	•	View Invoice
+	•	Download PDF Again
+	•	Search Bills
+	•	Filter by Date
+
+⸻
+
+Reports
+
+Generate reports for:
+	•	Daily Sales
+	•	Weekly Sales
+	•	Monthly Sales
+	•	Yearly Sales
+	•	Top Selling Products
+	•	Low Stock Products
+	•	Revenue Chart
+
+Allow exporting reports to CSV.
+
+⸻
+
+Database Design (Supabase)
+
+Create these tables with proper relationships:
+
+users
+
+products
+
+categories
+
+customers
+
+sales
+
+sale_items
+
+inventory_logs
+
+Use foreign keys and Row Level Security (RLS) policies where appropriate.
+
+⸻
+
+UI Design
+
+Use a modern admin dashboard.
+
+Include:
+	•	Left Sidebar Navigation
+	•	Top Navigation Bar
+	•	Dashboard Cards
+	•	Data Tables
+	•	Search Bars
+	•	Pagination
+	•	Modal Forms
+	•	Toast Notifications
+	•	Confirmation Dialogs
+	•	Loading Skeletons
+	•	Responsive Design
+	•	Dark Mode Toggle
+
+⸻
+
+Pages
+
+Create the following pages:
+	•	Login
+	•	Dashboard
+	•	Products
+	•	Inventory
+	•	Billing (POS)
+	•	Customers
+	•	Sales History
+	•	Reports
+	•	Settings
+
+⸻
+
+Additional Features
+	•	Product Search
+	•	Product Categories
+	•	Low Stock Notifications
+	•	Auto Invoice Number Generation
+	•	Dashboard Analytics
+	•	Mobile Responsive Design
+	•	Professional Animations
+	•	Error Handling
+	•	Form Validation
+	•	Loading Indicators
+
+⸻
+
+Code Requirements
+	•	Use clean and modular React components.
+	•	Use TypeScript throughout the project.
+	•	Use Supabase client for all database operations.
+	•	Organize the project into reusable components, hooks, pages, and services.
+	•	Include comments for educational purposes.
+	•	Follow modern React best practices.
+	•	Ensure the project is production-ready, fully functional, and suitable for a 3rd-year B.Sc. IT final year project.
+
+Generate the complete application with working CRUD operations, authentication, inventory management, billing, PDF invoice generation, reports, and a polished, professional UI.
