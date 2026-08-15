@@ -33,8 +33,33 @@ export function generateId(): string {
   return Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
 }
 
-export function formatCurrency(amount: number, currency = '₹'): string {
-  return `${currency}${amount.toFixed(2)}`;
+function sanitizeCurrencySymbol(currency: unknown): string {
+  if (typeof currency !== 'string') return '₹';
+  const s = currency.trim();
+  if (!s) return '₹';
+  try {
+    // Accept a single Unicode currency symbol (Sc) or a short alphabetic code (e.g. INR, Rs)
+    if (/^\p{Sc}$/u.test(s) || /^[A-Za-z]{1,3}$/.test(s)) return s;
+  } catch {
+    // If Unicode property escapes are unsupported, fall back to a simpler heuristic
+    if (/^[^\x00-\x1F\x7F-\x9F]+$/.test(s)) return s.charAt(0);
+  }
+  // If the symbol looks corrupted (replacement char or question mark), fallback
+  const first = s.charAt(0);
+  if (first === '\uFFFD' || first === '?') return '₹';
+  return first || '₹';
+}
+
+export function formatCurrency(amount: number | string | undefined, currency = '₹'): string {
+  const symbol = sanitizeCurrencySymbol(currency);
+  const n = amount == null ? 0 : Number(amount);
+  if (!Number.isFinite(n)) return `${symbol}0.00`;
+  try {
+    const fmt = new Intl.NumberFormat('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return `${symbol}${fmt.format(n)}`;
+  } catch {
+    return `${symbol}${n.toFixed(2)}`;
+  }
 }
 
 export function formatDate(dateStr: string): string {

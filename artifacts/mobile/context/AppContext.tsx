@@ -24,7 +24,7 @@ const DEFAULT_SETTINGS: ShopSettings = {
   phone: '',
   email: '',
   gstNumber: '',
-  currency: '₹',
+  currency: '$',
   gstEnabled: false,
   gstPercent: 18,
   lowStockThreshold: 10,

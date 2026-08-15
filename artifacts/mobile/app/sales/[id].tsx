@@ -28,8 +28,8 @@ function buildInvoiceHTML(sale: Sale, settings: ReturnType<typeof useApp>['setti
       <tr>
         <td>${item.productName}</td>
         <td style="text-align:center">${item.quantity} ${item.unit}</td>
-        <td style="text-align:right">${settings.currency}${item.unitPrice.toFixed(2)}</td>
-        <td style="text-align:right">${settings.currency}${item.total.toFixed(2)}</td>
+        <td style="text-align:right">{formatCurrency(item.unitPrice, settings.currency)}</td>
+        <td style="text-align:right">{formatCurrency(item.total, settings.currency)}</td>
       </tr>`
     )
     .join('');
@@ -107,13 +107,13 @@ function buildInvoiceHTML(sale: Sale, settings: ReturnType<typeof useApp>['setti
   <div class="totals" style="max-width: 280px; margin-left: auto; margin-top: 20px;">
     <div class="totals-row">
       <span class="label">Subtotal</span>
-      <span class="amount">${settings.currency}${sale.subtotal.toFixed(2)}</span>
+      <span class="amount">{formatCurrency(sale.subtotal, settings.currency)}</span>
     </div>
-    ${sale.discount > 0 ? `<div class="totals-row"><span class="label">Discount</span><span class="amount" style="color:#10B981">-${settings.currency}${sale.discount.toFixed(2)}</span></div>` : ''}
-    ${sale.gst > 0 ? `<div class="totals-row"><span class="label">GST (${sale.gstPercent}%)</span><span class="amount">${settings.currency}${sale.gst.toFixed(2)}</span></div>` : ''}
+    ${sale.discount > 0 ? `<div class="totals-row"><span class="label">Discount</span><span class="amount" style="color:#10B981">-{formatCurrency(sale.discount, settings.currency)}</span></div>` : ''}
+    ${sale.gst > 0 ? `<div class="totals-row"><span class="label">GST (${sale.gstPercent}%)</span><span class="amount">{formatCurrency(sale.gst, settings.currency)}</span></div>` : ''}
     <div class="totals-row grand">
       <span class="label">Grand Total</span>
-      <span class="amount">${settings.currency}${sale.grandTotal.toFixed(2)}</span>
+      <span class="amount">{formatCurrency(sale.grandTotal, settings.currency)}</span>
     </div>
   </div>
 
