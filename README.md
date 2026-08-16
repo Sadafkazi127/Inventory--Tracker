@@ -84,6 +84,8 @@ The application connects to the deployed backend API and can be installed on And
 ## 🛠️ Technology Stack
 
 ### Frontend
+- HTML
+- Tailwind CSS
 - React Native
 - Expo
 - Expo Router
