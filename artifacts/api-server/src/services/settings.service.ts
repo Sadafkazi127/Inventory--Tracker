@@ -8,7 +8,7 @@ const DEFAULTS: ShopSettingsInput = {
   phone: "",
   email: "",
   gstNumber: "",
-  currency: "₹",
+  currency: "\u20B9",
   gstEnabled: false,
   gstPercent: 18,
   lowStockThreshold: 10,

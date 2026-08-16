@@ -34,9 +34,9 @@ export function generateId(): string {
 }
 
 function sanitizeCurrencySymbol(currency: unknown): string {
-  if (typeof currency !== 'string') return '₹';
+  if (typeof currency !== 'string') return '\u20B9';
   const s = currency.trim();
-  if (!s) return '₹';
+  if (!s) return '\u20B9';
   try {
     // Accept a single Unicode currency symbol (Sc) or a short alphabetic code (e.g. INR, Rs)
     if (/^\p{Sc}$/u.test(s) || /^[A-Za-z]{1,3}$/.test(s)) return s;
@@ -46,11 +46,11 @@ function sanitizeCurrencySymbol(currency: unknown): string {
   }
   // If the symbol looks corrupted (replacement char or question mark), fallback
   const first = s.charAt(0);
-  if (first === '\uFFFD' || first === '?') return '₹';
-  return first || '₹';
+  if (first === '\uFFFD' || first === '?') return '\u20B9';
+  return first || '\u20B9';
 }
 
-export function formatCurrency(amount: number | string | undefined, currency = '₹'): string {
+export function formatCurrency(amount: number | string | undefined, currency = '\u20B9'): string {
   const symbol = sanitizeCurrencySymbol(currency);
   const n = amount == null ? 0 : Number(amount);
   if (!Number.isFinite(n)) return `${symbol}0.00`;

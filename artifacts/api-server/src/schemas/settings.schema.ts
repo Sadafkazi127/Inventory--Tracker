@@ -6,7 +6,7 @@ export const shopSettingsBodySchema = z.object({
   phone: z.string().default(""),
   email: z.string().default(""),
   gstNumber: z.string().default(""),
-  currency: z.string().min(1).default("₹"),
+  currency: z.string().min(1).default("\u20B9"),
   gstEnabled: z.boolean().default(false),
   gstPercent: z.number().min(0).default(18),
   lowStockThreshold: z.number().int().min(0).default(10),

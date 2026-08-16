@@ -10,7 +10,7 @@ export const shopSettingsTable = mysqlTable("shop_settings", {
   phone: varchar("phone", { length: 30 }).notNull().default(""),
   email: varchar("email", { length: 150 }).notNull().default(""),
   gstNumber: varchar("gst_number", { length: 30 }).notNull().default(""),
-  currency: varchar("currency", { length: 5 }).notNull().default("₹"),
+  currency: varchar("currency", { length: 5 }).notNull().default("\u20B9"),
   gstEnabled: boolean("gst_enabled").notNull().default(false),
   gstPercent: decimal("gst_percent", { precision: 5, scale: 2, mode: "number" }).notNull().default(18),
   lowStockThreshold: int("low_stock_threshold").notNull().default(10),

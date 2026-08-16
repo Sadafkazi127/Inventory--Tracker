@@ -166,7 +166,7 @@ export default function SettingsScreen() {
               label="Currency Symbol"
               value={form.currency}
               onChangeText={(v) => setForm((f) => ({ ...f, currency: v }))}
-              placeholder="₹"
+              placeholder="\u20B9"
               icon="dollar-sign"
             />
           </View>
